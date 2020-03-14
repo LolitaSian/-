@@ -1,0 +1,82 @@
+
+.nav_top {
+	width: 190px;
+	height: 30px;
+	background-color: #FF5000;
+}
+
+.navleft {
+	width: 188px;
+	height: 512px;
+	border-style: solid;
+	border-color: #FF5000;
+	border-width: 0 1px 1px 1px;
+	padding: 5px 0 3px 0;
+	overflow: hidden;
+}
+.navleft:hover{
+	overflow: visible;
+}
+.nav_top {
+	width: 190px;
+	height: 30px;
+	background-color: #FF5000;
+}
+
+.navleft {
+	width: 188px;
+	height: 512px;
+	border-style: solid;
+	border-color: #FF5000;
+	border-width: 0 1px 1px 1px;
+	padding: 5px 0 3px 0;
+}
+
+.item {
+	height: 32px;
+	padding-left: 25px;
+	position: relative;
+}
+
+.item:hover {
+	background-color: #FFE4DC;
+	color: #FF5000;
+}
+
+.item a {
+	line-height: 32px;
+	color: #666666;
+	font-size: 14px;
+	text-decoration: none;
+	font-family: 宋体;
+}
+
+.item:hover a {
+	color: #FF5000;
+}
+
+.item a:hover {
+	text-decoration: underline;
+}
+
+.item::after {
+	content: "\f105";
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+	float: right;
+	line-height: 32px;
+	font-size: 12px;
+	color: #AEAEAE;
+	padding-right: 10px;
+}
+.item:hover::after {
+	color: #FF5000;
+}
+.item .navbox{
+	width: 715px;
+	height: 200px;
+	border: 2px solid #FF253A;
+	position: absolute;
+	left: 188px;
+	top: 1px;
+}
