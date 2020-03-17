@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<img id="img" src="../pic/1.jpg"/>
+		<br />
+		<button type="button">开始切换嗷</button>
+		<button type="button">点击可以停止嗷</button>
+		<script>
+			//获取图片元素
+			var demo = document.getElementById("img");
+			//获取按钮
+			var btn = document.getElementsByTagName("button");
+			//存储定时器，便于开关
+			var time;
+			// 设定一个存储图片的数组
+			var picArr = ["../pic/1.jpg","../pic/2.jpg","../pic/3.jpg",
+			"../pic/4.jpg","../pic/5.jpg","../pic/6.jpg"];
+			var index = 0;
+			//设定计时器，每一秒钟切换一下
+			btn[0].onclick = function(){
+				//clearInterval()函数可以传正常参数以及null，undefined等
+				//在这里加上一个clearInterval()可以解决重复点击而造成的切换加快
+				clearInterval(time);
+				time = setInterval(function() {
+					//实现图片的循环
+					index = (index + 1)%picArr.length; 
+					demo.src = picArr[index];
+				}, 1000);
+			}
+			btn[1].onclick = function(){
+				clearInterval(time);
+			}
+		</script>
+	</body>
+</html>

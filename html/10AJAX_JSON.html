@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function() {
+				var websites = document.getElementsByTagName("a");
+				for (var i = 0; i < websites.length; i++) {
+					websites[i].onclick = function() {
+						var request = new XMLHttpRequest();
+						
+						var url = this.href;
+						var method = "GET";
+						
+						request.open(method, url);
+						request.send(null);
+						
+						request.onreadystatechange = function() {
+							if (request.readyState == 4) {
+								if (request.status == 200 || request.status == 304) {
+									//获取返回内容
+									var result = request.responseText;
+									var object = JSON.parse(result);
+									
+									var web = object.website;
+									var int = object.introduction;
+									
+									document.getElementById("detail").innerHTML=web + "<br>" + int;
+									
+								}
+							}
+						}
+						var bor = document.getElementById("detail");
+						bor.style.border = "solid 1px";
+						return false;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h3>托管平台</h3>
+		<ul>
+			<li><a href="09-10 ajax/10github.json">Github </a></li>
+			<li><a href="09-10 ajax/10gitee.json">Gitee</a></li>
+			<li><a href="09-10 ajax/10coding.json">Coding</a></li>
+			<div id="detail"></div>
+		</ul>
+	</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.picrotation {
+				height: 312px;
+				width: 450px;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.picrotation #picbox {
+				position: absolute;
+			}
+
+			.picrotation img {
+				width: 450px;
+				float: left;
+			}
+
+			#pointbox {
+				position: absolute;
+				top: 130px;
+			}
+
+			.picrotation .point {
+				float: left;
+				width: 12px;
+				height: 12px;
+				background-color: white;
+				border: 1px solid black;
+				border-radius: 12px;
+				margin: 10px
+			}
+
+			.picrotation .point:hover {
+				background-color: black;
+			}
+		</style>
+		<script src="../js/move.js" type="text/javascript"></script>
+		<script>
+			window.onload = function(){
+				
+				//设置picbox宽，使图片横向排列
+				var imglist = document.getElementById("picbox");
+				var imgArr = document.getElementsByTagName("img");
+				imglist.style.width = 450 * imgArr.length + "px";		
+						
+				//设置点点居中
+				var rotation = document.getElementById("picrotation");
+				var pointbox = document.getElementById("pointbox");
+				pointbox.style.left = (rotation.offsetWidth - pointbox.offsetWidth) / 2 + "px";		
+				
+				//设置轮转图片底下的导航默认点在第一个上
+				var index = 0;
+				var a = pointbox.getElementsByTagName("a");
+				a[index].style.backgroundColor = "black";
+						
+				/*点击超链接显示相应的图片*/
+				for (var i = 0; i < a.length; i++) {
+					/*为每一个超链接添加num属性，因为先执行for循环，再执行回调函数，因此执行回调函数的时候i=a.length-1，没意义，因此需要一个a[i]的标记*/
+					a[i].num = i;
+					a[i].onclick = function() {
+						clearInterval(time);
+						// 获取点击图片的超链接
+						index = this.num;
+						// 切换图片
+						// imglist.style.left = -450*index+"px";
+						// 修改点的颜色
+						setPointColor();
+						
+						//使用move函数切换图片
+						move(imglist, "left", -450 * index, 20, function() {
+							autochange();
+						});
+					}
+				}
+				autochange();
+						
+				var time;
+				function setPointColor() {
+					if (index >= imgArr.length - 1) {
+						index = 0;
+						imglist.style.left = 0;
+					}
+					for (var i = 0; i < a.length; i++) {
+						a[i].style.backgroundColor = "";
+					}
+					console.log(a.length);
+					a[index].style.background = "black";
+				}
+				
+				function autochange() {
+					time = setInterval(
+					function() {
+						index = (index+1)%imgArr.length;
+						console.log(index);
+						move(imglist, "left", -450 * index, 20, function() {
+							console.log(index);
+							setPointColor();
+						});
+					}, 2000);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="picrotation" id="picrotation">
+			<div id="picbox">
+				<a class="pic"><img src="../pic/3-轮换图片(1).png"></a>
+				<a class="pic"><img src="../pic/3-轮换图片(2).png"></a>
+				<a class="pic"><img src="../pic/3-轮换图片(3).png"></a>
+				<a class="pic"><img src="../pic/3-轮换图片(4).png"></a>
+				<a class="pic"><img src="../pic/3-轮换图片(1).png"></a>
+			</div>
+			<div id="pointbox">
+				<a class="point"></a>
+				<a class="point"></a>
+				<a class="point"></a>
+				<a class="point"></a>
+
+			</div>
+		</div>
+	</body>
+</html>
